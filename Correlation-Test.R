@@ -12,15 +12,33 @@ library("ggpubr")
 my_data <- mtcars
 
 #Find number of rows and columns in dataset
-> dim(my_data)
+dim(my_data)
 
 
 #Alternate Hypothesis: The weight of the car is inversely related to the mpg it can travel
 
 #Null Hypothesis: There is no difference/correlation between the weight of the car and the mpg it can travel
 
+#Create a scatter plot for dataset
 ggscatter(my_data, x = "mpg", y = "wt", add = "reg.line", conf.int = TRUE, cor.coef
 = TRUE, cor.method = "pearson", xlab = "Miles/(US) gallon", ylab = "Weight (1000
 lbs)")
 
-#plotname is correlation-scatterplot
+#Perform the correlation test
+res<-cor.test(my_data$wt, my_data$mpg, method = "pearson")
+
+res
+
+#Output
+Pearson's product-moment correlation
+
+data:  my_data$wt and my_data$mpg
+t = -9.559, df = 30, p-value = 1.294e-10
+alternative hypothesis: true correlation is not equal to 0
+95 percent confidence interval:
+ -0.9338264 -0.7440872
+sample estimates:
+       cor 
+-0.8676594
+
+#Accept the alternate hypothesis!
